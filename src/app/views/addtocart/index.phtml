@@ -1,0 +1,46 @@
+<?php
+if ($carts->count() > 0) {
+    ?>
+   
+    <a href="#" class="nav-link" id="user" ><h4>Your Cart</h4></a>
+    <div id="userdiv">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+        <tr>
+            
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            
+            
+        </tr>
+        </thead>
+        
+        <tbody>
+
+        <?php $grandtotal =0;
+        foreach ($carts as $cart) {
+            $grandtotal += $cart->price;
+             ?>
+            <tr>
+               
+                <td><?php echo $cart->product_name; ?></td>
+                <td><?php echo $cart->quantity ?></td>  
+                <td><?php echo $cart->price ?></td>  
+                 
+
+                
+        <?php } ?>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">Grand Total : <?php echo $grandtotal; ?></td>
+        </tr>
+        </tfoot>
+    </table>
+    </div>
+
+    <?php
+}
+
+?>
