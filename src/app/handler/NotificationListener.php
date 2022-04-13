@@ -29,7 +29,6 @@ class NotificationListener{
                    $validator = new Validator($tokenObject,100);
                    $validator->validateExpiration($expires);
 
-
                    $claims = $tokenObject->getClaims()->getPayload();
                    $role=$claims['sub'];
                    
@@ -57,9 +56,6 @@ class NotificationListener{
         else{
                echo "can't find any acl file";
                die; 
-        }
-        
-       
+        }    
     }
-
 }

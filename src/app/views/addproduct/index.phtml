@@ -1,28 +1,28 @@
-
+<table>
 <h2>Add New Product</h2>
 
 <?php echo $this->tag->form("addproduct/add"); ?>
     <p>
-        <label for="name">Name</label>
-        <?php echo $this->tag->textField("name"); ?>
+    <tr>  <td>  <label for="name">Name</label></td>
+    <td>    <?php echo $this->tag->textField("name"); ?></td></tr>
     </p>
     <p>
-        <label for="name">Category</label>
-        <?php echo $this->tag->textField("category"); ?>
+     <tr> <td>  <label for="name">Category</label></td>
+      <td><?php echo $this->tag->textField("category"); ?></td> </tr>
+    </p>
+    <p>
+       <tr> <td><label for="price">Price</label></td>
+     <td><?php echo $this->tag->textField("price"); ?></td></tr>
     </p>
 
-   
     <p>
-        <label for="price">Price</label>
-        <?php echo $this->tag->textField("price"); ?>
+      <tr> <td> <label for="stock">Stock</label></td>
+       <td><?php echo $this->tag->textField("stock");?></td></tr>
     </p>
     <p>
-        <label for="stock">Stock</label>
-        <?php echo $this->tag->textField("stock"); ?>
-    </p>
-    <p>
-        <?php echo $this->tag->submitButton("Add"); ?>
+       <tr><td> <?php echo $this->tag->submitButton("Add"); ?></td></tr>
         
     </p>
 
 </form>
+</table>

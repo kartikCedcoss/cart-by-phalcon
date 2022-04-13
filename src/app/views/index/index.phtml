@@ -27,7 +27,7 @@
                      <a class="btn btn-outline-dark" href="addtocart?bearer=<?php echo $_GET['bearer'] ?>">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
-                        <span class="badge bg-dark text-white ms-1 rounded-pill"><?php  echo $carts->count(); ?></span>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"><?php if($this->session->has('username')) {echo $carts->count(); }?></span>
                     </a> 
     
      <?php if($this->session->has('username')){
