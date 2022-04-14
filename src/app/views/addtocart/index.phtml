@@ -36,11 +36,14 @@ if ($carts->count() > 0) {
         <tr>
             <td colspan="3">Grand Total : <?php echo $grandtotal; ?></td>
         </tr>
+        <tr><td><a class="btn btn-success"  href="checkout">Checkout</a></td></tr>
         </tfoot>
     </table>
     </div>
 
     <?php
+}else{
+    echo "nothing is in your cart";
 }
 
 ?>

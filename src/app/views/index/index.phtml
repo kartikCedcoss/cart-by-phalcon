@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand" href="#!"><b>Shopingo</b></a>
@@ -13,12 +14,12 @@
                     <li class="nav-item">
                         <!-- <button class="btn btn-outline-success my-2 my-sm-0"  name="btnfilt" id="btnfilt" >Search</button></form> -->
                     </li></form>
-                         
+
                 </ul>
-                <form class="d-flex" method="POST" action="">
+                <form class="d-flex " method="POST" action="">
+                    
                 <a class="btn " href="#">
                         <i class="fa fa-user"></i>
-                        
                         <?php  $username = $this->session->get('username');
                         echo $username;  ?>
                     </a>
@@ -52,48 +53,30 @@
                 <div class="row justify-content-center" >
 
 
-                <div class="col-1 mt-4">
-
-                  </div>
+                
 <?php   if ($products->count() > 0) {
           foreach($products as $product){
     ?>     
-                        <div class="col-2 mt-4">
+                        <div class="col-3 mt-4">
                          <div class="card">
                          <img src="../../../public/img/<?php echo "socialmedia.png" ?>" alt="...   ">
                           <div class="card-body">
                          <span class="card-title"><b><?php  echo $product->product_name ?></b></span>
-                        
                         <span class="card-text"><small><?php  echo $product->product_category ?></small></span>
                         <div class=" ">
                         <span class=" text-danger"><b>Rs<?php  echo $product->price ?></b></span>
-
                      </div>
-                        
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <form method="POST" action="neworder?bearer=<?php echo $_GET['bearer'] ?>"><div class="text-center"><button class="btn btn-outline-dark mt-auto" value="<?php  echo $product->productId ?>"  name="neworder" >Buy Now</button></form></div>
-                        <form method="POST" action="addtocart/atocart?bearer=<?php echo $_GET['bearer'] ?>"> <div class="text-center"><button class="btn btn-outline-dark mt-auto" value="<?php  echo $product->productId ?>"  name="addtocart" >Add To Cart</button></form></div>
+                        <form method="POST" action="neworder?bearer=<?php echo $_GET['bearer'] ?>"><div class="text-center"><button class="btn btn-outline-success mt-auto border-0" value="<?php  echo $product->productId ?>"  name="neworder" >Buy Now</button></form></div>
+                        <form method="POST" action="addtocart/atocart?bearer=<?php echo $_GET['bearer'] ?>"> <div class="text-center"><button class="btn btn-outline-danger mt-1" value="<?php  echo $product->productId ?>"  name="addtocart" >Add To Cart</button></form></div>
                         <!-- <div class="text-center mt-1"><button class="btn btn-outline-danger border-0 mt-auto" value="'.$v["productId"].'"  name="moreinfo" >more info</button></div> -->
-
                     </div>
-
-
-
                     </div>
                 </div>
-
-
             </div>
                       <?php }?>
-                    <div class="col-1 mt-4">
-
-                  </div>
-
+                    
                 </div>
-
-                
-
-
             </div>
             <?php } ?> 
 </section>
