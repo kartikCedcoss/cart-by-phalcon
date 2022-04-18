@@ -5,7 +5,7 @@ use Phalcon\Mvc\Controller;
 
 use Phalcon\Security\JWT\Builder;
 use Phalcon\Security\JWT\Signer\Hmac;
-
+use Phalcon\Events\Manager as EventsManager;
 
 
 class LoginController extends Controller
@@ -27,6 +27,10 @@ class LoginController extends Controller
         $user =  Tb_users::findFirst(['conditions' => "email = '$email' AND password = '$pass'"]);
        
         if ($user) {
+            if($user->status == "pending"){
+                $this->view->message = "You Are On Pending State";
+            }
+            else{
             $this->session->set("userrole",$user->userrole);
             $this->session->set('username',$user->name);
             $this->session->set('userid',$user->id);
@@ -66,6 +70,7 @@ class LoginController extends Controller
             $this->logger->excludeAdapters(['signup'])->notice('Login By :-'.$user->name);
 
             $this->response->redirect("index?bearer=$token");
+            }
         }
         else{
             
@@ -81,24 +86,28 @@ class LoginController extends Controller
         $user = new Tb_users();
         $escape = new MyEscaper();
         $email = $this->request->getPost('email');
-        $name = $this->request->getPost('name');
+        $eventsManager = new EventsManager();
+        $component = new \App\Handler\Aware();
+        $component->setEventsManager($eventsManager);
         $data = array(
             "name" => $escape->sanitize($this->request->getPost('name')),
             "email" => $escape->sanitize($this->request->getPost('email')),
             "userrole" => $escape->sanitize($this->request->getPost('role')),
-            "password" => $escape->sanitize($this->request->getPost('password'))
+            "password" => $escape->sanitize($this->request->getPost('password')),
+            "status"=> "approved",
         );
          $user->assign(  $data ,[
             'name' ,
             'email',
             'userrole',
-            'password'
+            'password',
+             'status',
 
            ]);
 
         $success = $user->save();
         if ($success) {
-            
+
             $builder = new Builder($signer);
 
             $now        = new DateTimeImmutable();
@@ -124,6 +133,12 @@ class LoginController extends Controller
             $tokenObject = $builder->getToken();
             $token=$tokenObject->getToken();
             $this->session->set('username',$user->name);
+            $eventsManager->attach(
+                'user',
+                 new \App\Handler\Listener()
+                 );
+     
+               $component->process3();
             $this->logger->excludeAdapters(['login'])->notice('Created a new Account with Email:-'.$email);
 
             $this->response->redirect("index?bearer=$token");

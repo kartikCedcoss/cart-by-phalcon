@@ -25,10 +25,10 @@ if ($carts->count() > 0) {
             <tr>
                
                 <td><?php echo $cart->product_name; ?></td>
-                <td><?php echo $cart->quantity ?></td>  
-                <td><?php echo $cart->price ?></td>  
-                 
-
+                <td><form method="POST" action="addtocart/changequantity?bearer=<?php echo $_GET['bearer'];?>" ><input type="number" class="text-center border-0" value="<?php echo $cart->quantity; ?>" name="quantity" onchange='this.form.submit()'><input  type="hidden" name="cartid" value="<?php echo $cart->id; ?>" ></form></td>  
+                <td><?php echo $cart->price; ?></td>  
+                <td><form method="POST" action="addtocart/remove?bearer=<?php echo $_GET['bearer'];?>" ><button class="btn btn-danger" value="<?php echo $cart->id; ?>" name="btnRemove" >X</button></form></td> 
+ 
                 
         <?php } ?>
         </tbody>
@@ -36,7 +36,7 @@ if ($carts->count() > 0) {
         <tr>
             <td colspan="3">Grand Total : <?php echo $grandtotal; ?></td>
         </tr>
-        <tr><td><a class="btn btn-success"  href="checkout">Checkout</a></td></tr>
+        <tr><td><a class="btn btn-success"  href="checkout?bearer=<?php echo $_GET['bearer'];?>">Checkout</a></td></tr>
         </tfoot>
     </table>
     </div>

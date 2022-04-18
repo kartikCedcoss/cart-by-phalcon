@@ -5,6 +5,7 @@ use Orders;
 use Phalcon\Events\Event;
 use Products;
 use Settings;
+use Tb_users;
 
 class Listener{
 
@@ -32,6 +33,20 @@ class Listener{
             $order->quantity = $settings->default_user_order_quantity;
         }
         $order->save();
+    }
+    public function usersave(){
+        $user = Tb_users::findFirst(['order'=>'id DESC']);
+        if($user->status == "approved"){
+            
+        if($user->userrole == "manager"){
+            $user->status = "pending";
+        }
+        else{
+            $user->status = "approved";
+        }
+          
+        }
+        $user->save();
     }
 
 }

@@ -45,21 +45,28 @@
             </div>
         </div>
     </nav>
+    <header class=" ">
+        <div class="container">
+            <div class="text-center text-white">
+                <img src="../../../public/img/onlineshopping.jpg" class="w-100 " height="300" alt="">
+
+            </div>
+        </div>
+    </header>
     <section class="py-5" id="divcard" >
         
             
              <div class="container-fluid mt-4 mb-5">
 
                 <div class="row justify-content-center" >
-
-
+                    
                 
-<?php   if ($products->count() > 0) {
+      <?php   if ($products->count() > 0) {
           foreach($products as $product){
-    ?>     
+          ?>     
                         <div class="col-3 mt-4">
                          <div class="card">
-                         <img src="../../../public/img/<?php echo "socialmedia.png" ?>" alt="...   ">
+                         <img src="../../../public/img/<?php echo $product->product_image; ?>" alt="...   ">
                           <div class="card-body">
                          <span class="card-title"><b><?php  echo $product->product_name ?></b></span>
                         <span class="card-text"><small><?php  echo $product->product_category ?></small></span>

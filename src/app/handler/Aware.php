@@ -32,5 +32,11 @@ class Aware extends Injectable {
        
 
     }
+    public function process3()
+    {
+       return  $this->eventsManager->fire('user:usersave', $this);
+       
+
+    }
   
 }

@@ -7,7 +7,9 @@ use Phalcon\Mvc\Controller;
 
 
 class AddtocartController extends Controller
-{ 
+{   
+     
+
     public function indexAction()
     {    
          $userid = $this->session->get('userid');
@@ -47,6 +49,27 @@ class AddtocartController extends Controller
             }
           }
           
+    }
+    public function removeAction(){
+        $bearer=$this->request->get('bearer');
+         $cartid = $this->request->getPost('btnRemove');
+         $cart = Carts::findFirstByid($cartid);
+         $success = $cart->delete();
+         if($success){
+            $this->response->redirect("../addtocart?bearer=$bearer");
+         }
+    }
+    public function changequantityAction(){
+        $bearer=$this->request->get('bearer');
+        $cartid = $this->request->getPost('cartid');
+        $quantity = $this->request->getPost('quantity');
+         $cart = Carts::findFirstByid($cartid);
+         $cart->quantity = $quantity;
+         $success = $cart->save();
+         if($success){
+            $this->response->redirect("../addtocart?bearer=$bearer");
+         }
+
     }
    
 }
